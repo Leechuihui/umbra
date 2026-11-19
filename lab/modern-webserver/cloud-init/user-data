@@ -1,0 +1,72 @@
+#cloud-config
+# UMBRA modern webserver lab - cloud-init user-data
+#
+# This file is baked into a NoCloud seed ISO. Debian's cloud image reads it on
+# first boot to set the hostname, create the admin user, enable password login
+# and run the provisioning script.
+
+hostname: webserver-modern
+fqdn: webserver-modern.lab
+manage_etc_hosts: true
+
+users:
+  - name: leechuihui
+    gecos: Lab Operator
+    groups: [sudo]
+    shell: /bin/bash
+    lock_passwd: false
+    plain_text_passwd: "LabPass123!"
+
+chpasswd:
+  expire: false
+  list: |
+    root:LabPass123!
+    leechuihui:LabPass123!
+
+# Allow password authentication so the console and SSH both work.
+ssh_pwauth: true
+
+# Do not force a password change on first login.
+ssh_deletekeys: false
+
+package_update: true
+package_upgrade: false
+
+packages:
+  - curl
+  - ca-certificates
+  - gnupg
+  - lsb-release
+  - apt-transport-https
+  - unzip
+  - git
+  - htop
+  - net-tools
+
+write_files:
+  # Small motd so it is obvious which VM you are on during recording.
+  - path: /etc/motd
+    permissions: '0644'
+    content: |
+      ================================================
+       UMBRA Modern Webserver Lab
+       Debian 12 + nginx + PHP 8.2 + MariaDB + WordPress
+      ================================================
+
+runcmd:
+  # Bring the box up to date enough for a modern stack.
+  - [ bash, -lc, "apt-get update -y" ]
+  - [ bash, -lc, "apt-get install -y nginx mariadb-server php8.2-fpm php8.2-mysql php8.2-curl php8.2-gd php8.2-mbstring php8.2-xml php8.2-zip php8.2-intl php8.2-bcmath unzip curl" ]
+  - [ bash, -lc, "systemctl enable --now nginx php8.2-fpm mariadb" ]
+  # Install WordPress from the official tarball.
+  - [ bash, -lc, "cd /tmp && curl -fsSL https://wordpress.org/latest.tar.gz -o wp.tar.gz && tar xzf wp.tar.gz && cp -r wordpress/* /var/www/html/ && chown -R www-data:www-data /var/www/html" ]
+  # Create the WordPress database and user.
+  - [ bash, -lc, "mysql -e \"CREATE DATABASE wordpress; CREATE USER 'wp_user'@'localhost' IDENTIFIED BY 'WpLab!2026'; GRANT ALL ON wordpress.* TO 'wp_user'@'localhost'; FLUSH PRIVILEGES;\"" ]
+  # Minimal nginx vhost for PHP.
+  - [ bash, -lc, "printf '%s\n' 'server {' '  listen 80 default_server;' '  root /var/www/html;' '  index index.php index.html;' '  server_name _;' '  location / { try_files $uri $uri/ /index.php?$args; }' '  location ~ \\.php$ {' '    include snippets/fastcgi-php.conf;' '    fastcgi_pass unix:/run/php/php8.2-fpm.sock;' '  }' '}' > /etc/nginx/sites-available/default" ]
+  - [ bash, -lc, "nginx -t && systemctl reload nginx" ]
+  # Drop a config file WordPress would use, so the settings are discoverable
+  # during the post-exploitation exercise.
+  - [ bash, -lc, "cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php && sed -i \"s/database_name_here/wordpress/;s/username_here/wp_user/;s/password_here/WpLab!2026/\" /var/www/html/wp-config.php && chown www-data:www-data /var/www/html/wp-config.php" ]
+
+final_message: "UMBRA modern webserver lab is ready after $UPTIME seconds"

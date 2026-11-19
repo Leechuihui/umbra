@@ -21,7 +21,7 @@
 
 **UMBRA** 是一款面向高级红队行动的后渗透测试框架，由 Electron + React 桌面客户端与 Python 团队服务器组成，界面支持中英文实时切换。
 
-> Original work by **leechuihui** · 本项目为 **leechuihui** 原创作品
+> Original work by **Philippe** · 本项目为 **Philippe** 原创作品
 
 ---
 
@@ -307,7 +307,7 @@ umbra/
 
 ## Credits & License / 致谢与许可
 
-**Author**: leechuihui ([@Leechuihui](https://github.com/Leechuihui))
+**Author**: Philippe
 
 Licensed under **GPLv3** — see [LICENSE](LICENSE).
 

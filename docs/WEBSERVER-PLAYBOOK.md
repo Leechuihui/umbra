@@ -805,4 +805,4 @@ proxychains nmap -sT -Pn 10.8.0.0/24
 
 ---
 
-*UMBRA · Post Exploitation Framework · [github.com/Leechuihui/umbra](https://github.com/Leechuihui/umbra)*
+*UMBRA · Post Exploitation Framework · Author: Philippe*

@@ -1364,4 +1364,4 @@ https://github.com/Leechuihui/umbra
 
 ---
 
-*UMBRA · Post Exploitation Framework · [github.com/Leechuihui/umbra](https://github.com/Leechuihui/umbra)*
+*UMBRA · Post Exploitation Framework · Author: Philippe*

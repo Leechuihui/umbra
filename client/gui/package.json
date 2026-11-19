@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "UMBRA client - post exploitation framework by leechuihui",
-  "author": "leechuihui",
+  "author": "Philippe",
   "desktopName": "com.umbra.app",
   "main": "out/main/index.js",
   "scripts": {

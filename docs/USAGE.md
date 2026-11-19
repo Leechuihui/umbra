@@ -844,4 +844,4 @@ curl -v http://192.168.1.38:8080
 
 ---
 
-*UMBRA · Post Exploitation Framework · [github.com/Leechuihui/umbra](https://github.com/Leechuihui/umbra)*
+*UMBRA · Post Exploitation Framework · Author: Philippe*

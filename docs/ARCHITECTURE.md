@@ -557,4 +557,4 @@ SGN（Shikata Ga Nai）是一个多态编码器。同一段 shellcode 每次编�
 
 ---
 
-*UMBRA · Post Exploitation Framework · [github.com/Leechuihui/umbra](https://github.com/Leechuihui/umbra)*
+*UMBRA · Post Exploitation Framework · Author: Philippe*
