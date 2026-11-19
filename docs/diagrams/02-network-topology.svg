@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#5fe0c8"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#c97070"/>
+    </marker>
+    <marker id="arrowDim" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4a4a4a"/>
+    </marker>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101010"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7ef5d8"/>
+      <stop offset="1" stop-color="#2b7f72"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="780" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" fill="#ffffff" font-size="27" font-weight="600" letter-spacing="1">网络拓扑与端口转发</text>
+  <text x="600" y="78" text-anchor="middle" fill="#6e6e6e" font-size="14">NAT 环境下植入体如何回连</text>
+  <line x1="490" y1="94" x2="710" y2="94" stroke="url(#accentGrad)" stroke-width="2"/>
+
+  <!-- NAT zone -->
+  <rect x="50" y="130" width="330" height="300" rx="12" fill="#0f1514" stroke="#1f3a35" stroke-dasharray="8 6"/>
+  <text x="70" y="158" fill="#5fe0c8" font-size="12" font-weight="600" letter-spacing="1.5">NAT 私有网络</text>
+
+  <!-- Kali -->
+  <rect x="90" y="185" width="250" height="200" rx="10" fill="#161616" stroke="#5fe0c8" stroke-width="2"/>
+  <circle cx="118" cy="212" r="7" fill="#5fe0c8"/>
+  <text x="138" y="217" fill="#ffffff" font-size="16" font-weight="600">Kali（攻击机）</text>
+  <text x="110" y="248" fill="#5fe0c8" font-size="14" font-family="Consolas, monospace">10.0.2.15</text>
+  <line x1="110" y1="262" x2="320" y2="262" stroke="#252525"/>
+  <text x="110" y="288" fill="#a8a8a8" font-size="12.5">· UMBRA 服务端 :9000</text>
+  <text x="110" y="312" fill="#a8a8a8" font-size="12.5">· UMBRA 客户端</text>
+  <text x="110" y="336" fill="#a8a8a8" font-size="12.5">· 监听器 :8080</text>
+  <text x="110" y="368" fill="#5a5a5a" font-size="11.5" font-style="italic">外部无法直接访问</text>
+
+  <!-- Host -->
+  <rect x="450" y="185" width="300" height="200" rx="10" fill="#161616" stroke="#8a8a8a" stroke-width="1.5"/>
+  <circle cx="478" cy="212" r="7" fill="#8a8a8a"/>
+  <text x="498" y="217" fill="#ffffff" font-size="16" font-weight="600">宿主机（Windows）</text>
+  <text x="470" y="248" fill="#b0b0b0" font-size="14" font-family="Consolas, monospace">192.168.1.38</text>
+  <line x1="470" y1="262" x2="730" y2="262" stroke="#252525"/>
+  <text x="470" y="288" fill="#a8a8a8" font-size="12.5">· VirtualBox 运行环境</text>
+  <text x="470" y="312" fill="#a8a8a8" font-size="12.5">· 端口转发规则</text>
+  <text x="470" y="336" fill="#5fe0c8" font-size="12.5" font-family="Consolas, monospace">:8080 → Kali:8080</text>
+  <text x="470" y="358" fill="#5fe0c8" font-size="12.5" font-family="Consolas, monospace">:9000 → Kali:9000</text>
+
+  <!-- Target -->
+  <rect x="850" y="185" width="300" height="200" rx="10" fill="#161616" stroke="#c97070" stroke-width="2"/>
+  <circle cx="878" cy="212" r="7" fill="#c97070"/>
+  <text x="898" y="217" fill="#ffffff" font-size="16" font-weight="600">webserver（靶机）</text>
+  <text x="870" y="248" fill="#c97070" font-size="14" font-family="Consolas, monospace">192.168.1.46</text>
+  <line x1="870" y1="262" x2="1130" y2="262" stroke="#252525"/>
+  <text x="870" y="288" fill="#a8a8a8" font-size="12.5">· 已获取 root 权限</text>
+  <text x="870" y="312" fill="#a8a8a8" font-size="12.5">· 植入体运行于此</text>
+  <text x="870" y="336" fill="#a8a8a8" font-size="12.5">· 桥接网络</text>
+
+  <!-- Link: Kali <-> Host (NAT) -->
+  <line x1="340" y1="240" x2="448" y2="240" stroke="#4a4a4a" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="394" y="228" text-anchor="middle" fill="#6e6e6e" font-size="11">NAT</text>
+
+  <!-- Link: Host <-> Target (bridged) -->
+  <line x1="750" y1="240" x2="848" y2="240" stroke="#8a8a8a" stroke-width="2"/>
+  <text x="799" y="228" text-anchor="middle" fill="#6e6e6e" font-size="11">桥接</text>
+
+  <!-- THE KEY FLOW: implant -> host:8080 -> kali:8080 -->
+  <path d="M870 420 Q700 520 600 470 Q500 420 340 400" stroke="#5fe0c8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <text x="600" y="510" text-anchor="middle" fill="#5fe0c8" font-size="14" font-weight="600">植入体回连路径（正确做法）</text>
+  <text x="600" y="534" text-anchor="middle" fill="#a8a8a8" font-size="12.5" font-family="Consolas, monospace">implant → 192.168.1.38:8080 → 转发 → Kali:8080</text>
+
+  <!-- WRONG path -->
+  <path d="M870 560 Q600 640 340 560" stroke="#c97070" stroke-width="2.5" stroke-dasharray="7 5" fill="none" marker-end="url(#arrowRed)"/>
+  <text x="600" y="620" text-anchor="middle" fill="#c97070" font-size="14" font-weight="600">✕ 错误做法：直接连 Kali 的 10.0.2.15</text>
+  <text x="600" y="644" text-anchor="middle" fill="#8a5a5a" font-size="12.5">目标机无法路由到 NAT 私有地址 → 回连必然失败</text>
+
+  <!-- Config box -->
+  <rect x="120" y="675" width="960" height="80" rx="10" fill="#121212" stroke="#242424"/>
+  <text x="150" y="703" fill="#5fe0c8" font-size="13" font-weight="600">VirtualBox 端口转发命令（宿主机 PowerShell 执行）</text>
+  <text x="150" y="728" fill="#b0b0b0" font-size="12" font-family="Consolas, monospace">VBoxManage controlvm kali natpf1 "umbra-http,tcp,,8080,,8080"</text>
+  <text x="150" y="748" fill="#b0b0b0" font-size="12" font-family="Consolas, monospace">VBoxManage controlvm kali natpf1 "umbra-api,tcp,,9000,,9000"</text>
+
+  <!-- Footer -->
+  <text x="600" y="775" text-anchor="middle" fill="#3a3a3a" font-size="10">UMBRA · github.com/Leechuihui/umbra</text>
+</svg>

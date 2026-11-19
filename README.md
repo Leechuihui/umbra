@@ -230,6 +230,32 @@ Both are persisted locally and restored on next launch.
 
 ---
 
+## Documentation / 文档
+
+Full guides live in [`docs/`](docs/):
+
+| Document | Contents |
+|---|---|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Why the three layers exist, auth design, C2 flow, evasion techniques, what you learn |
+| [docs/USAGE.md](docs/USAGE.md) | Step-by-step install → first session, network scenarios, troubleshooting |
+| [docs/VIDEO-SCRIPT.md](docs/VIDEO-SCRIPT.md) | Full tutorial video script with shot list and recording checklist |
+
+### Diagrams / 架构图
+
+SVG vector diagrams, ready for slides and video overlays:
+
+| Diagram | File |
+|---|---|
+| Three-layer architecture | [01-architecture.svg](docs/diagrams/01-architecture.svg) |
+| Network topology & port forwarding | [02-network-topology.svg](docs/diagrams/02-network-topology.svg) |
+| C2 communication flow (8 steps) | [03-c2-flow.svg](docs/diagrams/03-c2-flow.svg) |
+| Post-exploitation capabilities | [04-post-exploitation.svg](docs/diagrams/04-post-exploitation.svg) |
+| Quick start (5 steps) | [05-quickstart.svg](docs/diagrams/05-quickstart.svg) |
+
+![Three-layer architecture](docs/diagrams/01-architecture.svg)
+
+---
+
 ## Project Structure / 项目结构
 
 ```

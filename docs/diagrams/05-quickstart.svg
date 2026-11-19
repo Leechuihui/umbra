@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#5fe0c8"/>
+    </marker>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101010"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7ef5d8"/>
+      <stop offset="1" stop-color="#2b7f72"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#bgGrad)"/>
+
+  <text x="600" y="48" text-anchor="middle" fill="#ffffff" font-size="27" font-weight="600" letter-spacing="1">快速开始 · 五步上线</text>
+  <text x="600" y="76" text-anchor="middle" fill="#6e6e6e" font-size="14">Quick Start · 顺序不能错</text>
+  <line x1="500" y1="92" x2="700" y2="92" stroke="url(#accentGrad)" stroke-width="2"/>
+
+  <!-- Step 1 -->
+  <rect x="60" y="125" width="210" height="130" rx="10" fill="#161616" stroke="#2f2f2f"/>
+  <circle cx="88" cy="152" r="15" fill="#5fe0c8"/>
+  <text x="88" y="157" text-anchor="middle" fill="#0a0a0a" font-size="13" font-weight="700">1</text>
+  <text x="112" y="157" fill="#ffffff" font-size="14" font-weight="600">部署</text>
+  <text x="80" y="185" fill="#5a5a5a" font-size="11" font-family="Consolas, monospace">sudo bash</text>
+  <text x="80" y="203" fill="#5a5a5a" font-size="11" font-family="Consolas, monospace">install.sh all</text>
+  <text x="80" y="232" fill="#8a8a8a" font-size="11.5">约 30–40 分钟</text>
+
+  <line x1="270" y1="190" x2="308" y2="190" stroke="#5fe0c8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2 -->
+  <rect x="315" y="125" width="210" height="130" rx="10" fill="#161616" stroke="#2f2f2f"/>
+  <circle cx="343" cy="152" r="15" fill="#5fe0c8"/>
+  <text x="343" y="157" text-anchor="middle" fill="#0a0a0a" font-size="13" font-weight="700">2</text>
+  <text x="367" y="157" fill="#ffffff" font-size="14" font-weight="600">启动服务端</text>
+  <text x="335" y="185" fill="#5a5a5a" font-size="11" font-family="Consolas, monospace">./umbra.py</text>
+  <text x="335" y="203" fill="#5a5a5a" font-size="11" font-family="Consolas, monospace">server start</text>
+  <text x="335" y="232" fill="#8a8a8a" font-size="11.5">监听 :9000</text>
+
+  <line x1="525" y1="190" x2="563" y2="190" stroke="#5fe0c8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3 -->
+  <rect x="570" y="125" width="210" height="130" rx="10" fill="#161616" stroke="#2f2f2f"/>
+  <circle cx="598" cy="152" r="15" fill="#5fe0c8"/>
+  <text x="598" y="157" text-anchor="middle" fill="#0a0a0a" font-size="13" font-weight="700">3</text>
+  <text x="622" y="157" fill="#ffffff" font-size="14" font-weight="600">连接认证</text>
+  <text x="590" y="185" fill="#5a5a5a" font-size="11">客户端 → 服务器</text>
+  <text x="590" y="203" fill="#5a5a5a" font-size="11">粘贴三段式密钥</text>
+  <text x="590" y="232" fill="#c97070" font-size="11.5" font-weight="600">必须点「认证」</text>
+
+  <line x1="780" y1="190" x2="818" y2="190" stroke="#5fe0c8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4 -->
+  <rect x="825" y="125" width="210" height="130" rx="10" fill="#161616" stroke="#2f2f2f"/>
+  <circle cx="853" cy="152" r="15" fill="#5fe0c8"/>
+  <text x="853" y="157" text-anchor="middle" fill="#0a0a0a" font-size="13" font-weight="700">4</text>
+  <text x="877" y="157" fill="#ffffff" font-size="14" font-weight="600">建监听器</text>
+  <text x="845" y="185" fill="#5a5a5a" font-size="11" font-family="Consolas, monospace">Shift+L</text>
+  <text x="845" y="203" fill="#5a5a5a" font-size="11">Port to Open: 8080</text>
+  <text x="845" y="232" fill="#8a8a8a" font-size="11.5">依赖服务器配置</text>
+
+  <!-- Step 5 -->
+  <rect x="60" y="295" width="975" height="150" rx="10" fill="#0f1a18" stroke="#5fe0c8" stroke-width="2"/>
+  <circle cx="88" cy="322" r="15" fill="#7ef5d8"/>
+  <text x="88" y="327" text-anchor="middle" fill="#0a0a0a" font-size="13" font-weight="700">5</text>
+  <text x="112" y="327" fill="#ffffff" font-size="15" font-weight="600">生成植入体并执行</text>
+  <text x="112" y="347" fill="#5fe0c8" font-size="11" font-family="Consolas, monospace">Shift+I</text>
+  <line x1="80" y1="362" x2="1025" y2="362" stroke="#1f3a35"/>
+  <text x="80" y="386" fill="#b0b0b0" font-size="12.5">C2 地址填 <tspan fill="#7ef5d8" font-family="Consolas, monospace">192.168.1.38:8080</tspan>（宿主机 IP，不是 Kali IP）</text>
+  <text x="80" y="410" fill="#b0b0b0" font-size="12.5">延迟 5s · 抖动 20% · 按需开启 AMSI / ETW / 睡眠掩码</text>
+  <text x="80" y="434" fill="#b0b0b0" font-size="12.5">目标机执行 → 数秒后会话上线 → 双击进入终端</text>
+
+  <!-- Dependency warning -->
+  <rect x="60" y="475" width="975" height="105" rx="10" fill="#1a1414" stroke="#8a3a3a"/>
+  <text x="80" y="502" fill="#c97070" font-size="14" font-weight="600">⚠ 顺序依赖关系（最常见的失败原因）</text>
+  <text x="80" y="528" fill="#b0b0b0" font-size="12.5">服务器配置 → 只有认证成功才写入 config.json → 监听器的服务器下拉框才有选项</text>
+  <text x="80" y="552" fill="#b0b0b0" font-size="12.5">跳过认证直接建监听器 → 下拉框为空 → 无法创建 → 后续全部卡住</text>
+  <text x="80" y="572" fill="#8a5a5a" font-size="11.5" font-style="italic">记住：服务端启动 → 客户端认证 → 建监听器 → 生成植入体</text>
+
+  <!-- Checklist -->
+  <rect x="60" y="605" width="975" height="110" rx="10" fill="#121212" stroke="#242424"/>
+  <text x="80" y="632" fill="#5fe0c8" font-size="13" font-weight="600">上线前检查清单</text>
+  <text x="80" y="658" fill="#a8a8a8" font-size="12">☐ 端口转发已配置（8080 / 9000）　　☐ 服务端 9000 在监听　　☐ 客户端已认证（状态灯绿）</text>
+  <text x="80" y="682" fill="#a8a8a8" font-size="12">☐ 监听器 8080 已绑定　　☐ 植入体 C2 地址是宿主机 IP　　☐ 目标机可访问宿主机 8080</text>
+  <text x="80" y="704" fill="#5a5a5a" font-size="11.5" font-style="italic">任一项不满足，会话都不会上线</text>
+
+  <text x="600" y="745" text-anchor="middle" fill="#3a3a3a" font-size="11">UMBRA · github.com/Leechuihui/umbra</text>
+</svg>

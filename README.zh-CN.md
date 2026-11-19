@@ -227,6 +227,32 @@ umbra.py <mode> <command> ...
 
 ---
 
+## 文档
+
+完整指南在 [`docs/`](docs/) 目录：
+
+| 文档 | 内容 |
+|---|---|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 三层架构为什么这样设计、认证机制、C2 通信流程、隐蔽性技术、能学到什么 |
+| [docs/USAGE.md](docs/USAGE.md) | 从安装到首个会话的完整步骤、网络场景专题、排错手册 |
+| [docs/VIDEO-SCRIPT.md](docs/VIDEO-SCRIPT.md) | 完整视频教程分镜脚本 + 录制清单 |
+
+### 架构图
+
+SVG 矢量图，可直接用于 PPT 和视频叠加：
+
+| 图 | 文件 |
+|---|---|
+| 三层架构 | [01-architecture.svg](docs/diagrams/01-architecture.svg) |
+| 网络拓扑与端口转发 | [02-network-topology.svg](docs/diagrams/02-network-topology.svg) |
+| C2 通信流程（8 步） | [03-c2-flow.svg](docs/diagrams/03-c2-flow.svg) |
+| 后渗透能力全景 | [04-post-exploitation.svg](docs/diagrams/04-post-exploitation.svg) |
+| 快速开始（5 步） | [05-quickstart.svg](docs/diagrams/05-quickstart.svg) |
+
+![三层架构](docs/diagrams/01-architecture.svg)
+
+---
+
 ## 项目结构
 
 ```
