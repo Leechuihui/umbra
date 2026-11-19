@@ -30,6 +30,20 @@ const buildCertPayload = (cert: ListenerCert): Record<string, unknown> => {
   return base;
 };
 
+/**
+ * The listener's bind address.
+ *
+ * `data.host` identifies the team server (used for the API URL), so it must
+ * never be sent as the bind address: doing so bound the socket to the server's
+ * own IP (e.g. 127.0.0.1) and remote implants could not connect. `bindHost`
+ * defaults to 0.0.0.0, which listens on every interface.
+ */
+const bindAddress = (data: ListenerFormData): string => {
+  const raw = (data.bindHost ?? "").trim();
+  const cleaned = raw.replace(/^https?:\/\//i, "");
+  return cleaned || "0.0.0.0";
+};
+
 const buildPayload = (data: ListenerFormData): Record<string, any> => {
   const base = { name: data.name, listenerType: data.listenerType };
 
@@ -37,7 +51,7 @@ const buildPayload = (data: ListenerFormData): Record<string, any> => {
     const payload: Record<string, unknown> = {
       ...base,
       ssl: data.ssl,
-      host: typeof data.host === "string" ? data.host.trim().replace(/^https?:\/\//i, "") : data.host,
+      host: bindAddress(data),
       port: data.port,
       portToOpen: data.portToOpen,
     };
@@ -52,7 +66,7 @@ const buildPayload = (data: ListenerFormData): Record<string, any> => {
     const channelBase = {
       ...base,
       channelPayload,
-      host: typeof data.host === "string" ? data.host.trim().replace(/^https?:\/\//i, "") : data.host,
+      host: bindAddress(data),
       port: data.port,
       portToOpen: data.portToOpen,
     };

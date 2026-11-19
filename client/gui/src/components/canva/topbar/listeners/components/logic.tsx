@@ -102,7 +102,15 @@ export interface ListenerFormData {
   name: string;
   listenerType: ListenerType;
   channelPayload: ChannelPayload;
+  /** Team server that manages this listener (its ip, used to build the API URL). */
   host: string;
+  /**
+   * Bind address for the listener socket. Kept separate from `host` because
+   * `host` identifies the team server: reusing it as the bind address made the
+   * listener bind to the server's own IP (e.g. 127.0.0.1), which is unreachable
+   * for remote implants. 0.0.0.0 listens on every interface.
+   */
+  bindHost: string;
   port: string;
   portToOpen: string;
   ssl: boolean;
@@ -167,6 +175,7 @@ export const EMPTY_FORM: ListenerFormData = {
   listenerType: 'channel',
   channelPayload: 'http',
   host: '',
+  bindHost: '0.0.0.0',
   port: '80',
   portToOpen: '',
   ssl: false,
@@ -535,6 +544,10 @@ export const createServerSelectHandler =
     ) => void
   ) =>
   (host: string, port: string) => {
+    // `host`/`port` identify the team server that manages this listener, and
+    // are only used to build the API URL. The listener's bind address lives in
+    // `bindHost` and stays at 0.0.0.0, otherwise the socket would bind to the
+    // server's own IP and remote implants could never reach it.
     handleFormChange("host", host);
     handleFormChange("port", port);
   };
