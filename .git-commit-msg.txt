@@ -1,0 +1,26 @@
+docs: add webserver scenario video script
+
+Adds docs/VIDEO-SCRIPT-WEBSERVER.md, a scenario-driven script built on the
+real lab: Kali 192.168.1.50 (bridged) against webserver 192.168.1.46
+(Debian 8, Apache 2.4.20, Drupal 7.20, openvpn tun0 into 10.8.0.0/24).
+
+Premise: the root shell is already obtained; the video covers what to do
+afterwards and why a C2 framework is still needed.
+
+Eight acts with a full timeline (00:00-62:00):
+1. scenario and problem definition - three limits of a bare shell
+2. deploy the platform - server, client, three-part key auth
+3. persistent access - listener (0.0.0.0 vs 127.0.0.1 trap), implant
+   build, upload and first session
+4. collection - terminal, file browser (Drupal DB password), process
+   panel (openvpn), credential store
+5. pivoting - screenshot, keylogger, SOCKS proxy into 10.8.0.0/24,
+   file server
+6. automation - Nuke scripts, AI agent, queue and event log
+7. delivery - IOC, PDF report, dashboard, notebook, command palette
+8. wrap-up - attack chain recap, four learning layers, disclaimer
+
+Includes recording checklist, video description copy, a 30-item teaching
+self-review table and a follow-up series plan.
+
+- README.md / README.zh-CN.md / docs/README.md: link the new script
