@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2026 Gustavo Henrique T.
+# Copyright (C) 2026 leechuihui
 # SPDX-License-Identifier: GPL-3.0-or-later
 # See LICENSE in the repository root.
 
@@ -18,6 +18,7 @@
 
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -71,6 +72,39 @@ def is_root():
     return os.geteuid() == 0
 
 
+def has_libfuse2():
+    """True when the AppImage runtime can mount itself (needs libfuse2).
+
+    Kali and other modern distros only ship libfuse3, so the AppImage must be
+    extracted before it can run. Checked via ldconfig, then by probing the
+    usual library paths.
+    """
+    if os.name == "nt":
+        return True
+    try:
+        out = subprocess.run(
+            ["ldconfig", "-p"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        ).stdout
+        if "libfuse.so.2" in out:
+            return True
+    except (OSError, subprocess.SubprocessError):
+        pass
+
+    for path in (
+        "/usr/lib/x86_64-linux-gnu/libfuse.so.2",
+        "/usr/lib/aarch64-linux-gnu/libfuse.so.2",
+        "/usr/lib64/libfuse.so.2",
+        "/usr/lib/libfuse.so.2",
+        "/lib/x86_64-linux-gnu/libfuse.so.2",
+    ):
+        if os.path.exists(path):
+            return True
+    return False
+
+
 def client():
     if os.name == "nt":
         if not (client_root / "dist" / "win-unpacked" / "umbra.exe").is_file():
@@ -104,10 +138,18 @@ def client():
             env["XAUTHORITY"] = f"/home/{sudo_user}/.Xauthority"
 
     # Start
-    argv = [str(client_root / "dist" / "umbra.AppImage")]
+    appimage = client_root / "dist" / "umbra.AppImage"
+    argv = [str(appimage)]
     if is_root():
         argv.append("--no-sandbox")
-    os.execve(str(client_root / "dist" / "umbra.AppImage"), argv, env)
+
+    # Kali and other modern distros ship libfuse3 only. The AppImage runtime
+    # needs libfuse2, so fall back to extracting before running.
+    if not has_libfuse2():
+        print("[ info ] libfuse2 not found; using --appimage-extract-and-run")
+        argv.insert(1, "--appimage-extract-and-run")
+
+    os.execve(str(appimage), argv, env)
 
 
 def server(argv):
@@ -161,28 +203,36 @@ def version():
 
 # MAIN LOGIC =====================================================================================
 
-args = sys.argv[1:]
-args_spaced = f" {' '.join(args)} " if args else " "
 
-if len(args) == 0 or " help " in args_spaced:
-    print(umbra_help)
-    sys.exit(0)
+def main(argv=None):
+    args = list(sys.argv[1:] if argv is None else argv)
+    args_spaced = f" {' '.join(args)} " if args else " "
 
-if len(args) >= 2 and args[0] == "client" and args[1] == "start":
-    if is_root():
-        print("[ \x1b[38;2;255;48;48mERROR\x1b[0m ] The client must not be executed with sudo", file=sys.stderr)
-        sys.exit(1)
-    client()
+    if len(args) == 0 or " help " in args_spaced:
+        print(umbra_help)
+        return 0
 
-if len(args) >= 1 and args[0] == "server":
-    if is_root():
-        print("[ \x1b[38;2;255;48;48mERROR\x1b[0m ] The server must not be executed with sudo", file=sys.stderr)
-        sys.exit(1)
-    server(args[1:])
+    if len(args) >= 2 and args[0] == "client" and args[1] == "start":
+        if is_root():
+            print("[ \x1b[38;2;255;48;48mERROR\x1b[0m ] The client must not be executed with sudo", file=sys.stderr)
+            return 1
+        client()
+        return 0
 
-if len(args) >= 1 and args[0] == "version":
-    version()
-    sys.exit(0)
+    if len(args) >= 1 and args[0] == "server":
+        if is_root():
+            print("[ \x1b[38;2;255;48;48mERROR\x1b[0m ] The server must not be executed with sudo", file=sys.stderr)
+            return 1
+        server(args[1:])
+        return 0
 
-print(umbra_help, file=sys.stderr)
-sys.exit(1)
+    if len(args) >= 1 and args[0] == "version":
+        version()
+        return 0
+
+    print(umbra_help, file=sys.stderr)
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
