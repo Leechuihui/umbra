@@ -1,7 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain, dialog, session, Menu, screen, net } from 'electron'
 import { join, dirname, normalize } from 'path'
 import { homedir } from 'os'
-import { appendFileSync, createReadStream, createWriteStream, readFileSync, writeFileSync, existsSync, statSync, unlinkSync } from 'fs'
+import { appendFileSync, createReadStream, createWriteStream, readFileSync, writeFileSync, existsSync, statSync, unlinkSync, accessSync, mkdirSync, constants as fsConstants } from 'fs'
 import type { WriteStream } from 'fs'
 import { constants as bufferConstants } from 'buffer'
 import { contentSecurityPolicy } from './csp'
@@ -168,16 +168,40 @@ function packagedPortableDir(): string {
   return dirname(process.execPath)
 }
 
-/** Dev/preview: project folder. Packaged: beside .exe / AppImage, or userData if config only exists there. */
+/** True when we can create files inside `dir`. */
+function isWritableDir(dir: string): boolean {
+  try {
+    accessSync(dir, fsConstants.W_OK)
+    return true
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Dev/preview: project folder.
+ * Packaged: beside .exe / AppImage when that location is writable, otherwise
+ * the per-user data dir. Installs under /opt (or Program Files) are owned by
+ * root, so writing config.json next to the binary would fail with EACCES.
+ */
 function appDataDir(): string {
   if (!app.isPackaged) return app.getAppPath()
   if (cachedAppDataDir) return cachedAppDataDir
 
   const portable = packagedPortableDir()
   const userData = app.getPath('userData')
-  if (existsSync(join(portable, 'config.json'))) cachedAppDataDir = portable
-  else if (existsSync(join(userData, 'config.json'))) cachedAppDataDir = userData
-  else cachedAppDataDir = portable
+
+  if (existsSync(join(portable, 'config.json'))) {
+    cachedAppDataDir = portable
+  } else if (existsSync(join(userData, 'config.json'))) {
+    cachedAppDataDir = userData
+  } else if (isWritableDir(portable)) {
+    cachedAppDataDir = portable
+  } else {
+    // Portable location is read-only (e.g. /opt install) — use userData.
+    mkdirSync(userData, { recursive: true })
+    cachedAppDataDir = userData
+  }
 
   return cachedAppDataDir
 }

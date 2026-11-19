@@ -131,18 +131,30 @@ export const ServerDropdown = ({
       ) : null}
       <Select value={selectedId || undefined} onValueChange={handleChange}>
         <SelectTrigger className="w-full text-[13.5px] bg-[#212121] border-[#363636] text-[#cecece] rounded px-3 py-1.5 h-auto focus:border-[#555] focus-visible:ring-0">
-          <SelectValue placeholder={t("listeners.serverPlaceholder")} />
+          <SelectValue
+            placeholder={
+              servers.length === 0
+                ? t("listeners.noServers")
+                : t("listeners.serverPlaceholder")
+            }
+          />
         </SelectTrigger>
         <SelectContent className="text-[13.5px]">
-          {servers.map((s) => (
-            <SelectItem
-              key={s.id}
-              value={s.id}
-              className="text-[13.5px]"
-            >
-              {truncateServerLabel(getServerOptionLabel(s))}
+          {servers.length === 0 ? (
+            <SelectItem value="__no_servers" disabled className="text-[13.5px]">
+              {t("listeners.noServers")}
             </SelectItem>
-          ))}
+          ) : (
+            servers.map((s) => (
+              <SelectItem
+                key={s.id}
+                value={s.id}
+                className="text-[13.5px]"
+              >
+                {truncateServerLabel(getServerOptionLabel(s))}
+              </SelectItem>
+            ))
+          )}
         </SelectContent>
       </Select>
     </div>
