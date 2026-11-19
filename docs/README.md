@@ -8,6 +8,7 @@
 
 | 文档 | 内容 | 适合谁 |
 |---|---|---|
+| [KALI.md](KALI.md) | **Kali 专用**：安装、启动、连接、监听器、植入体、排错、卸载 | 在 Kali 上使用的人 |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | 架构原理、设计思路、技术栈、能学到什么 | 想理解"为什么"的人 |
 | [USAGE.md](USAGE.md) | 从安装到实战的完整操作手册 + 排错 | 想上手操作的人 |
 | [VIDEO-SCRIPT.md](VIDEO-SCRIPT.md) | 完整视频分镜脚本 + 录制清单 | 做教程视频的人 |

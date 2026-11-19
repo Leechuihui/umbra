@@ -233,6 +233,7 @@ umbra.py <mode> <command> ...
 
 | 文档 | 内容 |
 |---|---|
+| [docs/KALI.md](docs/KALI.md) | **Kali 专用**：安装、启动、连接、监听器、植入体、排错、卸载 |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 三层架构为什么这样设计、认证机制、C2 通信流程、隐蔽性技术、能学到什么 |
 | [docs/USAGE.md](docs/USAGE.md) | 从安装到首个会话的完整步骤、网络场景专题、排错手册 |
 | [docs/VIDEO-SCRIPT.md](docs/VIDEO-SCRIPT.md) | 完整视频教程分镜脚本 + 录制清单 |

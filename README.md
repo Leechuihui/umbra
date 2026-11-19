@@ -236,6 +236,7 @@ Full guides live in [`docs/`](docs/):
 
 | Document | Contents |
 |---|---|
+| [docs/KALI.md](docs/KALI.md) | **Kali-specific**: install, start, connect, listeners, implants, troubleshooting, uninstall |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Why the three layers exist, auth design, C2 flow, evasion techniques, what you learn |
 | [docs/USAGE.md](docs/USAGE.md) | Step-by-step install → first session, network scenarios, troubleshooting |
 | [docs/VIDEO-SCRIPT.md](docs/VIDEO-SCRIPT.md) | Full tutorial video script with shot list and recording checklist |
