@@ -7,27 +7,31 @@ try:
     from fastapi.exceptions import RequestValidationError
     from starlette.exceptions import HTTPException as StarletteHTTPException
     from fastapi.middleware.cors import CORSMiddleware
-    from routes import terminal as _terminal_
-    from routes import listeners as _listeners_
-    from routes import sessions as _sessions_
-    from routes import explorer as _explorer_
-    from routes import process as _process_
-    from routes import auth as _auth_
-    from routes import implants as _implants_
-    from routes import logs as _logs_
-    from routes import file_server as _file_server_
-    from routes import agents as _agents_
-    from routes import credentials as _credentials_
-    from routes import keylogger as _keylogger_
-    from routes import queue as _queue_
-    from routes import iocs as _iocs_
-    from routes import scripts as _scripts_
-    from routes import notifications as _notifications_
-    from routes import screenshot as _screenshot_
-    from routes import network as _network_
-    from routes import ns_output as _ns_output_
-    from routes import reports as _reports_
-    from routes import aes as _aes_
+    # Absolute imports: `from routes import ...` would resolve to the unrelated
+    # `routes` package installed system-wide (a URL-routing library) instead of
+    # this project's own routes/ directory, which fails with
+    #   cannot import name 'terminal' from 'routes'
+    from core.routes import terminal as _terminal_
+    from core.routes import listeners as _listeners_
+    from core.routes import sessions as _sessions_
+    from core.routes import explorer as _explorer_
+    from core.routes import process as _process_
+    from core.routes import auth as _auth_
+    from core.routes import implants as _implants_
+    from core.routes import logs as _logs_
+    from core.routes import file_server as _file_server_
+    from core.routes import agents as _agents_
+    from core.routes import credentials as _credentials_
+    from core.routes import keylogger as _keylogger_
+    from core.routes import queue as _queue_
+    from core.routes import iocs as _iocs_
+    from core.routes import scripts as _scripts_
+    from core.routes import notifications as _notifications_
+    from core.routes import screenshot as _screenshot_
+    from core.routes import network as _network_
+    from core.routes import ns_output as _ns_output_
+    from core.routes import reports as _reports_
+    from core.routes import aes as _aes_
     from infra.database.database import sqlite_db
     from infra.listeners.http.manage import http_listener
     from infra.listeners.file_server.manage import file_server_listener
