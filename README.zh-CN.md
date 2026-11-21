@@ -6,11 +6,18 @@
 </p>
 
 <p align="center">
-  后渗透测试框架 · Post exploitation framework
+  后渗透测试框架
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> · <b>简体中文</b>
+  [English](README.md) | **简体中文**
+</p>
+
+<p align="center">
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3fb950?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+  [![Python](https://img.shields.io/badge/Python-3.10+-3fb950?logo=python&logoColor=white)](https://python.org)
+  [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-8b5cf6)](LICENSE)
+  [![Category: Security](https://img.shields.io/badge/Category-Security-58a6ff)](https://github.com/Leechuihui/umbra)
 </p>
 
 ---
